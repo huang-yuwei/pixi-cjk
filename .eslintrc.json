@@ -4,7 +4,7 @@
     "es6": true,
     "jest": true
   },
-  "extends": ["standard"],
+  "extends": ["standard", "plugin:prettier/recommended"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 6,
@@ -14,17 +14,24 @@
     "PIXI": true,
     "Float32Array": true
   },
-  "plugins": ["@typescript-eslint"],
+  "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
-    "semi": ["error", "always"],
-    "linebreak-style": ["error", "unix"],
-    "quotes": ["error", "single"],
-    "curly": ["error", "all"],
-    "brace-style": ["error", "stroustrup", { "allowSingleLine": false }],
-    "indent": ["error", 2, { "SwitchCase": 1 }],
-    "eqeqeq": ["error", "always"],
-    "no-var": ["error"],
-    "no-console": ["warn"],
-    "no-trailing-spaces": ["error"]
+    "import/first": 0,
+    "prettier/prettier": [
+      2,
+      {
+        "singleQuote": true,
+        "trailingComma": "all"
+      }
+    ],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_"
+      }
+    ],
+    "no-useless-catch": 0,
+    "no-prototype-builtins": 0
   }
 }
