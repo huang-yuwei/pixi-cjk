@@ -1,0 +1,63 @@
+{
+  "name": "pixi-cjk",
+  "version": "0.1.0",
+  "description": "CJK supporting for Pixi.js",
+  "author": "Yuwei Huang <yuwei.h.design@gmail.com>",
+  "contributors": [
+    "Dave Moore <themoonrat@gmail.com>"
+  ],
+  "scripts": {
+    "test": "yarn build",
+    "clean": "rimraf bin && mkdirp bin",
+    "lint": "eslint --no-error-on-unmatched-pattern src --fix",
+    "watch:lint": "watch \"yarn lint\" src",
+    "prestart": "yarn clean",
+    "start": "yarn watch:all && yarn watch:lint",
+    "prebuild": "yarn clean && yarn lint",
+    "build": "yarn build:all && yarn build:all:es",
+    "watch:all": "rollup -c -w",
+    "build:all": "rollup -c && rollup -c --environment BUILD:prod",
+    "build:all:es": "rollup -c --environment FORMAT:es && rollup -c --environment BUILD:prod,FORMAT:es"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.8.1",
+    "@typescript-eslint/parser": "^4.8.1",
+    "eslint": "^7.14.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "mkdirp": "^1.0.4",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.7.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript": "^1.0.1",
+    "rollup-watch": "^4.3.1",
+    "typescript": "^4.1.2",
+    "watch": "^1.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/huang-yuwei/pixi-cjk"
+  },
+  "bugs": {
+    "url": "https://github.com/huang-yuwei/pixi-cjk/issues"
+  },
+  "files": [
+    "LICENSE",
+    "package.json",
+    "README.md"
+  ],
+  "keywords": [
+    "pixi",
+    "pixi.js",
+    "cjk",
+    "Chinese",
+    "Japanese",
+    "Korean",
+    "word-wrap"
+  ],
+  "license": "MIT"
+}
