@@ -1,0 +1,12 @@
+{
+	"compilerOptions": {
+		"target": "ES6",
+		"module": "commonjs",
+		"noImplicitAny": true,
+		"noEmit": true
+	},
+	"include": [
+    "src/*.ts",
+    "test/*.ts"
+	]
+}
