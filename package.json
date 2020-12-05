@@ -6,6 +6,7 @@
   "contributors": [
     "Dave Moore <themoonrat@gmail.com>"
   ],
+  "main": "bin/pixi-cjk.min.js",
   "scripts": {
     "test": "jest",
     "clean": "rimraf bin && mkdirp bin",
