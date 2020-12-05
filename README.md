@@ -1,4 +1,4 @@
-## pixi-cjk
+## PIXI CJK
 
 pixi-cjk is a plugin for Pixi.js to display the Chinese/Japanese/Korean correctly
 
@@ -9,7 +9,10 @@ pixi-cjk is a plugin for Pixi.js to display the Chinese/Japanese/Korean correctl
 
 ## Usage
 
-Apply the Text style with `breakWords: true`, then the plugin should cover the CJK styling for you.
+Apply the Text style with `breakWords: true`, then improt the plugin. It should cover the CJK styling for you.
+```
+import 'pixi-cjk';
+```
 
 ## How it works
 
