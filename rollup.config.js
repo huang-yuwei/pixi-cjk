@@ -15,7 +15,6 @@ const file = `bin/pixi-cjk${suffixFormat}${suffix}.js`;
 const plugins = [
   resolve(),
   typescript(),
-  terser(),
   commonjs({ extensions: ['.js', '.ts'] }),
 ];
 
@@ -34,17 +33,18 @@ const banner = `/*!
  */\n`;
 
 export default {
-  banner,
-  globals: {
-    'pixi.js': 'PIXI',
-  },
-  intro: `if (typeof PIXI === 'undefined') { throw 'PixiJS is required'; }`,
   input,
   output: {
+    banner,
+    intro: `if (typeof PIXI === 'undefined') { throw 'PixiJS is required'; }`,
     name: `__pixiCJK`,
+    globals: {
+      'pixi.js': 'PIXI',
+    },
     file,
     format,
+    sourcemap: true,
   },
-  sourcemap: true,
+  external: ['pixi.js'],
   plugins,
 };
