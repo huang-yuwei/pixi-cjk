@@ -1,6 +1,6 @@
 /*!
  * pixi-cjk - v0.1.0
- * Compiled Sat, 05 Dec 2020 08:46:15 UTC
+ * Compiled Mon, 11 Jan 2021 05:43:30 UTC
  *
  * pixi-cjk is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
