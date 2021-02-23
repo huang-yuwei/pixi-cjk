@@ -30,3 +30,13 @@ export const canBreakChars = function canBreakChars(
   }
   return true;
 };
+
+export const trimByKinsokuShorui = (prev: string[]): string[] => {
+  const next = [...prev];
+  const prevLine = next[next.length - 2];
+  const lastChar = prevLine[prevLine.length - 1];
+
+  next[next.length - 2] = prevLine.slice(0, -1);
+  next[next.length - 1] = (lastChar || '') + next[next.length - 1];
+  return next;
+};
