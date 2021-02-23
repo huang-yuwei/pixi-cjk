@@ -10,6 +10,7 @@ pixi-cjk is a plugin for Pixi.js to display the Chinese/Japanese/Korean correctl
 ## Usage
 
 Apply the Text style with `breakWords: true`, then improt the plugin. It should cover the CJK styling for you.
+
 ```
 import 'pixi-cjk';
 ```
@@ -18,3 +19,13 @@ import 'pixi-cjk';
 
 - About the Kinsoku-shori, detect the Regex of unbreakable character (refer from: https://en.wikipedia.org/wiki/Line_breaking_rules_in_East_Asian_languages), and preventing break-lines when the matched the result.
 - About the breaking space, when a space is following by a NOT-LATIN word, the space should not be a breaking space.
+
+## Example
+
+### Before
+
+![before](docs/before.png)
+
+### After
+
+![before](docs/after.png)
