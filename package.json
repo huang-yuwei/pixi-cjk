@@ -1,11 +1,8 @@
 {
   "name": "pixi-cjk",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "CJK supporting for Pixi.js",
   "author": "Yuwei Huang <yuwei.h.design@gmail.com>",
-  "contributors": [
-    "Dave Moore <themoonrat@gmail.com>"
-  ],
   "main": "bin/pixi-cjk.min.js",
   "scripts": {
     "test": "jest",

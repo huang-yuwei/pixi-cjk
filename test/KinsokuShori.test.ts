@@ -1,113 +1,136 @@
-import { canBreakChars } from '../src/KinsokuShori';
+import {
+  trimByKinsokuShorui,
+  shouldBreakByKinsokuShorui,
+} from '../src/KinsokuShori';
 
 describe('KinsokuShori', () => {
-  describe('Chinese', () => {
-    it('can break general chars', () => {
-      expect(canBreakChars('中')).toBeTruthy();
+  describe('trimByKinsokuShorui', () => {
+    let prev: string[] = [];
+    let next: string[] = [];
 
-      expect(canBreakChars('中', '文')).toBeTruthy();
-
-      expect(canBreakChars('。', '中')).toBeTruthy();
-
-      expect(canBreakChars('，', '中')).toBeTruthy();
-
-      expect(canBreakChars('；', '中')).toBeTruthy();
+    beforeEach(() => {
+      prev = ['こんにちは、これはテストの文章、正しく表示してる', '?'];
     });
 
-    it('can not break when straring from the chars', () => {
-      expect(canBreakChars('文', '？')).toBeFalsy();
+    it('should return an array of updating lines', () => {
+      next = ['こんにちは、これはテストの文章、正しく表示して', 'る?'];
+      expect(trimByKinsokuShorui(prev)).toStrictEqual(next);
 
-      expect(canBreakChars('文', '」')).toBeFalsy();
-
-      expect(canBreakChars('文', '』')).toBeFalsy();
-
-      expect(canBreakChars('文', '"')).toBeFalsy();
-
-      expect(canBreakChars('文', '，')).toBeFalsy();
-
-      expect(canBreakChars('文', '。')).toBeFalsy();
-    });
-
-    it('can not break when ending to the chars', () => {
-      expect(canBreakChars('$', '中')).toBeFalsy();
-
-      expect(canBreakChars('「', '中')).toBeFalsy();
-
-      expect(canBreakChars('『', '中')).toBeFalsy();
-
-      expect(canBreakChars('"', '中')).toBeFalsy();
+      prev = ['안녕하세요,이 테스트의 문장입니다 제대로 표시하고', '?'];
+      next = ['안녕하세요,이 테스트의 문장입니다 제대로 표시하', '고?'];
+      expect(trimByKinsokuShorui(prev)).toStrictEqual(next);
     });
   });
 
-  describe('Japanese', () => {
-    it('can break general chars', () => {
-      expect(canBreakChars('あ')).toBeTruthy();
+  describe('shouldBreakByKinsokuShorui', () => {
+    describe('Chinese', () => {
+      it('should not break general chars', () => {
+        expect(shouldBreakByKinsokuShorui('中')).toBeFalsy();
 
-      expect(canBreakChars('あ', 'い')).toBeTruthy();
+        expect(shouldBreakByKinsokuShorui('中', '文')).toBeFalsy();
 
-      expect(canBreakChars('。', 'あ')).toBeTruthy();
+        expect(shouldBreakByKinsokuShorui('中', '。')).toBeFalsy();
 
-      expect(canBreakChars('、', 'あ')).toBeTruthy();
+        expect(shouldBreakByKinsokuShorui('中', '，')).toBeFalsy();
 
-      expect(canBreakChars('・', 'あ')).toBeTruthy();
+        expect(shouldBreakByKinsokuShorui('中', '；')).toBeFalsy();
+      });
+
+      it('should break when straring from the illegal chars', () => {
+        expect(shouldBreakByKinsokuShorui('？', '文')).toBeTruthy();
+
+        expect(shouldBreakByKinsokuShorui('」', '文')).toBeTruthy();
+
+        expect(shouldBreakByKinsokuShorui('』', '文')).toBeTruthy();
+
+        expect(shouldBreakByKinsokuShorui('"', '文')).toBeTruthy();
+
+        expect(shouldBreakByKinsokuShorui('，', '文')).toBeTruthy();
+
+        expect(shouldBreakByKinsokuShorui('。', '文')).toBeTruthy();
+      });
+
+      it('should break when ending to the illegal chars', () => {
+        expect(shouldBreakByKinsokuShorui('中', '$')).toBeTruthy();
+
+        expect(shouldBreakByKinsokuShorui('中', '「')).toBeTruthy();
+
+        expect(shouldBreakByKinsokuShorui('中', '『')).toBeTruthy();
+
+        expect(shouldBreakByKinsokuShorui('中', '"')).toBeTruthy();
+      });
     });
 
-    it('can not break when straring from the chars', () => {
-      expect(canBreakChars('い', '？')).toBeFalsy();
+    describe('Japanese', () => {
+      it('should not break general chars', () => {
+        expect(shouldBreakByKinsokuShorui('あ')).toBeFalsy();
 
-      expect(canBreakChars('い', '々')).toBeFalsy();
+        expect(shouldBreakByKinsokuShorui('あ', 'い')).toBeFalsy();
 
-      expect(canBreakChars('い', 'ー')).toBeFalsy();
+        expect(shouldBreakByKinsokuShorui('あ', '。')).toBeFalsy();
 
-      expect(canBreakChars('い', 'ァ')).toBeFalsy();
+        expect(shouldBreakByKinsokuShorui('あ', '、')).toBeFalsy();
 
-      expect(canBreakChars('い', 'ッ')).toBeFalsy();
+        expect(shouldBreakByKinsokuShorui('あ', '・')).toBeFalsy();
+      });
 
-      expect(canBreakChars('い', '»')).toBeFalsy();
+      it('should break when straring from the illegal chars', () => {
+        expect(shouldBreakByKinsokuShorui('？', 'い')).toBeTruthy();
+
+        expect(shouldBreakByKinsokuShorui('々', 'い')).toBeTruthy();
+
+        expect(shouldBreakByKinsokuShorui('ー', 'い')).toBeTruthy();
+
+        expect(shouldBreakByKinsokuShorui('ァ', 'い')).toBeTruthy();
+
+        expect(shouldBreakByKinsokuShorui('ッ', 'い')).toBeTruthy();
+
+        expect(shouldBreakByKinsokuShorui('»', 'い')).toBeTruthy();
+      });
+
+      it('should break when ending to the illegal chars', () => {
+        expect(shouldBreakByKinsokuShorui('あ', '$')).toBeTruthy();
+
+        expect(shouldBreakByKinsokuShorui('あ', '—')).toBeTruthy();
+
+        expect(shouldBreakByKinsokuShorui('あ', '«')).toBeTruthy();
+      });
     });
 
-    it('can not break when ending to the chars', () => {
-      expect(canBreakChars('$', 'あ')).toBeFalsy();
+    describe('Korean', () => {
+      it('should not break general chars', () => {
+        expect(shouldBreakByKinsokuShorui('한')).toBeFalsy();
 
-      expect(canBreakChars('—', 'あ')).toBeFalsy();
+        expect(shouldBreakByKinsokuShorui('한', '국')).toBeFalsy();
 
-      expect(canBreakChars('«', 'あ')).toBeFalsy();
+        expect(shouldBreakByKinsokuShorui('한', ',')).toBeFalsy();
+      });
+
+      it('should break when straring from the illegal chars', () => {
+        expect(shouldBreakByKinsokuShorui('?', '국')).toBeTruthy();
+
+        expect(shouldBreakByKinsokuShorui('」', '국')).toBeTruthy();
+
+        expect(shouldBreakByKinsokuShorui('%', '국')).toBeTruthy();
+      });
+
+      it('should break when ending to the illegal chars', () => {
+        expect(shouldBreakByKinsokuShorui('한', '「')).toBeTruthy();
+
+        expect(shouldBreakByKinsokuShorui('한', '『')).toBeTruthy();
+
+        expect(shouldBreakByKinsokuShorui('한', '¥')).toBeTruthy();
+      });
     });
-  });
 
-  describe('Korean', () => {
-    it('can break general chars', () => {
-      expect(canBreakChars('한')).toBeTruthy();
+    describe('Other languages', () => {
+      it('should not break general chars', () => {
+        expect(shouldBreakByKinsokuShorui('A')).toBeFalsy();
 
-      expect(canBreakChars('한', '국')).toBeTruthy();
+        expect(shouldBreakByKinsokuShorui('A', 'B')).toBeFalsy();
 
-      expect(canBreakChars(',', '한')).toBeTruthy();
-    });
-
-    it('can not break when straring from the chars', () => {
-      expect(canBreakChars('국', '?')).toBeFalsy();
-
-      expect(canBreakChars('국', '」')).toBeFalsy();
-
-      expect(canBreakChars('국', '%')).toBeFalsy();
-    });
-
-    it('can not break when ending to the chars', () => {
-      expect(canBreakChars('「', '한')).toBeFalsy();
-
-      expect(canBreakChars('『', '한')).toBeFalsy();
-
-      expect(canBreakChars('¥', '한')).toBeFalsy();
-    });
-  });
-
-  describe('Other languages', () => {
-    it('can break general chars', () => {
-      expect(canBreakChars('A')).toBeTruthy();
-
-      expect(canBreakChars('A', 'B')).toBeTruthy();
-
-      expect(canBreakChars(',', 'A')).toBeTruthy();
+        expect(shouldBreakByKinsokuShorui('A', ',')).toBeFalsy();
+      });
     });
   });
 });
