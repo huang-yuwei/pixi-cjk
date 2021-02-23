@@ -1,4 +1,9 @@
-const LATIN_REGEX = /[A-Za-z]/;
+const LATIN_REGEX = /[a-zA-Z0-9\u00C0-\u00D6\u00D8-\u00f6\u00f8-\u00ff!"#$%&'()*+,-./:;]/;
+
+export const canBreakInLastChar = (char: string | undefined): boolean => {
+  if (char && LATIN_REGEX.test(char)) return false;
+  return true;
+};
 
 export const trimToBreakable = (prev: string[]): string[] => {
   const next = [...prev];
