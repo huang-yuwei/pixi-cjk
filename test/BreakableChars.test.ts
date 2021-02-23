@@ -1,6 +1,32 @@
-import { findBreakableIndex, sumTextWidthByCache } from '../src/BreakableChars';
+import {
+  canBreakInLastChar,
+  findBreakableIndex,
+  sumTextWidthByCache,
+} from '../src/BreakableChars';
 
 describe('BreakableChars', () => {
+  describe('canBreakInLastChar', () => {
+    describe('when the char is a latin char', () => {
+      it('should return a false', () => {
+        expect(canBreakInLastChar('a')).toBeFalsy();
+
+        expect(canBreakInLastChar('A')).toBeFalsy();
+
+        expect(canBreakInLastChar('1')).toBeFalsy();
+      });
+    });
+
+    describe('when the char is a CJK char', () => {
+      it('should return a true', () => {
+        expect(canBreakInLastChar('中')).toBeTruthy();
+
+        expect(canBreakInLastChar('あ')).toBeTruthy();
+
+        expect(canBreakInLastChar('문')).toBeTruthy();
+      });
+    });
+  });
+
   describe('sumTextWidthByCache', () => {
     const subject = () => {
       return sumTextWidthByCache(text, cache);
