@@ -19,7 +19,7 @@ describe('PIXI.TextMetrics', () => {
   });
   const canvas = document.createElement('canvas');
 
-  describe('canBreakChars', () => {
+  describe('Kinsoku-Shorui in text metrics', () => {
     const style = new TextStyle({
       fontWeight: 'bold',
       fontSize: fontSize,
@@ -72,6 +72,128 @@ describe('PIXI.TextMetrics', () => {
         '시하고 있습니까?',
       ];
       const source = beforePlugin.join('');
+
+      it('should break chars as rules', () => {
+        const { lines } = TextMetrics.measureText(source, style, true, canvas);
+        expect(lines).toStrictEqual(afterPlugin);
+      });
+    });
+  });
+
+  describe('Breakable chars in text metrics', () => {
+    const style = new TextStyle({
+      fontWeight: 'bold',
+      fontSize: fontSize,
+      wordWrap: true,
+      breakWords: true,
+      wordWrapWidth: 340,
+    });
+
+    describe('List Style', () => {
+      const beforePlugin = [
+        '-',
+        'こんにちは、これはテストの文章、正しく表示して',
+        'る？',
+      ];
+      const afterPlugin = [
+        '- こんにちは、これはテストの文章、正しく表示し',
+        'てる？',
+      ];
+      const source = `${beforePlugin[0]} ${beforePlugin[1]}${beforePlugin[2]}`;
+
+      it('should break chars as rules', () => {
+        const { lines } = TextMetrics.measureText(source, style, true, canvas);
+        expect(lines).toStrictEqual(afterPlugin);
+      });
+    });
+
+    describe('List Styles', () => {
+      const beforePlugin = [
+        '-',
+        'こんにちは、これはテストの文章、正しく表示Pre',
+        'ttierる？',
+      ];
+      const afterPlugin = [
+        '- こんにちは、これはテストの文章、正しく表示',
+        'Prettierる？',
+      ];
+      const source = `${beforePlugin[0]} ${beforePlugin[1]}${beforePlugin[2]}`;
+
+      it('should break chars as rules', () => {
+        const { lines } = TextMetrics.measureText(source, style, true, canvas);
+        expect(lines).toStrictEqual(afterPlugin);
+      });
+    });
+
+    describe('Number List Style', () => {
+      const beforePlugin = [
+        '1.',
+        'こんにちは、これはテストの文章、正しく表示し',
+        'てる？',
+      ];
+      const afterPlugin = [
+        '1. こんにちは、これはテストの文章、正しく表示',
+        'してる？',
+      ];
+      const source = `${beforePlugin[0]} ${beforePlugin[1]}${beforePlugin[2]}`;
+
+      it('should break chars as rules', () => {
+        const { lines } = TextMetrics.measureText(source, style, true, canvas);
+        expect(lines).toStrictEqual(afterPlugin);
+      });
+    });
+
+    describe('Mixed Style', () => {
+      const beforePlugin = [
+        'こんにちは、これはテストHello',
+        'World',
+        'Worldという文章、正しく表示してる？',
+      ];
+      const afterPlugin = [
+        'こんにちは、これはテストHello World',
+        'Worldという文章、正しく表示してる？',
+      ];
+      const source = `${beforePlugin[0]} ${beforePlugin[1]} ${beforePlugin[2]}`;
+
+      it('should break chars as rules', () => {
+        const { lines } = TextMetrics.measureText(source, style, true, canvas);
+        expect(lines).toStrictEqual(afterPlugin);
+      });
+    });
+
+    describe('Mixed Style with a long word', () => {
+      const beforePlugin = [
+        'こんにちは、これはテストHelloooooooooooooooooooooooooooooooooooooooooooo',
+      ];
+      const afterPlugin = [
+        'こんにちは、これはテスト',
+        'Helloooooooooooooooooooo',
+        'oooooooooooooooooooooooo',
+      ];
+      const source = `${beforePlugin[0]}`;
+
+      it('should break chars as rules', () => {
+        const { lines } = TextMetrics.measureText(source, style, true, canvas);
+        expect(lines).toStrictEqual(afterPlugin);
+      });
+    });
+
+    describe('Default behavior with general text', () => {
+      const beforePlugin = ['The is a test text for', 'checking space breaks'];
+      const afterPlugin = ['The is a test text for', 'checking space breaks'];
+      const source = `${beforePlugin[0]} ${beforePlugin[1]}`;
+
+      it('should break chars as rules', () => {
+        const { lines } = TextMetrics.measureText(source, style, true, canvas);
+        expect(lines).toStrictEqual(afterPlugin);
+      });
+    });
+
+    describe('Default behavior with break-line text', () => {
+      const beforePlugin = ['The is a test text for', 'checking space breaks'];
+      const afterPlugin = ['The is a test text for', 'checking space breaks'];
+      const source = `${beforePlugin[0]}
+${beforePlugin[1]}`;
 
       it('should break chars as rules', () => {
         const { lines } = TextMetrics.measureText(source, style, true, canvas);
