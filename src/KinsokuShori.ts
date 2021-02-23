@@ -20,6 +20,8 @@ export const canBreakChars = function canBreakChars(
   char: string,
   nextChar?: string,
 ) {
+  if (this.isBreakingSpace(char)) return false;
+
   if (nextChar) {
     // Line breaking rules in CJK (Kinsoku Shori)
     if (regexCannotEnd.exec(char) || regexCannotStart.exec(nextChar)) {
