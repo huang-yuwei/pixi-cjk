@@ -29,7 +29,10 @@ export const sumTextWidthByCache = (
   text: string,
   cache: { [key in string]: number },
 ) => {
-  return text.split('').reduce((sum: number, c) => sum + cache[c], 0);
+  return text.split('').reduce((sum: number, c) => {
+    if (!cache[c]) throw Error('cannot count the word without cache');
+    return sum + cache[c];
+  }, 0);
 };
 
 export const findBreakableIndex = (line: string): number => {
