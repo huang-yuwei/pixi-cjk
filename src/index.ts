@@ -46,6 +46,10 @@ PIXI.TextMetrics.wordWrap = function (
       currentWidth = 0;
       lines[currentIndex] = '';
 
+      if (this.isBreakingSpace(char)) {
+        continue;
+      }
+
       if (!canBreakInLastChar(char)) {
         lines = trimToBreakable(lines);
         currentWidth = sumTextWidthByCache(lines[currentIndex] || '', cache);

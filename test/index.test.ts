@@ -189,6 +189,20 @@ describe('PIXI.TextMetrics', () => {
       });
     });
 
+    describe('Default behavior when the space is over the max width', () => {
+      const beforePlugin = [
+        'The is a tests texts for',
+        'checking space breaks',
+      ];
+      const afterPlugin = ['The is a tests texts for', 'checking space breaks'];
+      const source = `${beforePlugin[0]} ${beforePlugin[1]}`;
+
+      it('should break chars as rules without space in the begining', () => {
+        const { lines } = TextMetrics.measureText(source, style, true, canvas);
+        expect(lines).toStrictEqual(afterPlugin);
+      });
+    });
+
     describe('Default behavior with break-line text', () => {
       const beforePlugin = ['The is a test text for', 'checking space breaks'];
       const afterPlugin = ['The is a test text for', 'checking space breaks'];
