@@ -1,10 +1,47 @@
 import {
+  trimToBreakable,
   canBreakInLastChar,
   findBreakableIndex,
   sumTextWidthByCache,
 } from '../src/BreakableChars';
 
 describe('BreakableChars', () => {
+  describe('trimToBreakable', () => {
+    let prev: string[] = [];
+    let next: string[] = [];
+
+    beforeEach(() => {
+      prev = ['The is a test text for', ''];
+    });
+
+    describe('when lines are English', () => {
+      it('should return an array of updating lines', () => {
+        next = ['The is a test text', 'for'];
+        expect(trimToBreakable(prev)).toStrictEqual(next);
+
+        prev = ['The is a test text ', 'for'];
+        next = ['The is a test text', 'for'];
+        expect(trimToBreakable(prev)).toStrictEqual(next);
+      });
+    });
+
+    describe('when lines are CJK', () => {
+      it('should return an array of updating lines', () => {
+        prev = ['こんにちは、これはテストの文章、正しく表示', ''];
+        next = ['こんにちは、これはテストの文章、正しく表示', ''];
+        expect(trimToBreakable(prev)).toStrictEqual(next);
+      });
+    });
+
+    describe('when lines are CJK line with English', () => {
+      it('should return an array of updating lines', () => {
+        prev = ['こんにちは、これはテストの文章、正しく表示DISPLAY', ''];
+        next = ['こんにちは、これはテストの文章、正しく表示', 'DISPLAY'];
+        expect(trimToBreakable(prev)).toStrictEqual(next);
+      });
+    });
+  });
+
   describe('canBreakInLastChar', () => {
     describe('when the char is a latin char', () => {
       it('should return a false', () => {
