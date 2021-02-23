@@ -1,6 +1,27 @@
-import { shouldBreakByKinsokuShorui } from '../src/KinsokuShori';
+import {
+  trimByKinsokuShorui,
+  shouldBreakByKinsokuShorui,
+} from '../src/KinsokuShori';
 
 describe('KinsokuShori', () => {
+  describe('trimByKinsokuShorui', () => {
+    let prev: string[] = [];
+    let next: string[] = [];
+
+    beforeEach(() => {
+      prev = ['こんにちは、これはテストの文章、正しく表示してる', '?'];
+    });
+
+    it('should return an array of updating lines', () => {
+      next = ['こんにちは、これはテストの文章、正しく表示して', 'る?'];
+      expect(trimByKinsokuShorui(prev)).toStrictEqual(next);
+
+      prev = ['안녕하세요,이 테스트의 문장입니다 제대로 표시하고', '?'];
+      next = ['안녕하세요,이 테스트의 문장입니다 제대로 표시하', '고?'];
+      expect(trimByKinsokuShorui(prev)).toStrictEqual(next);
+    });
+  });
+
   describe('shouldBreakByKinsokuShorui', () => {
     describe('Chinese', () => {
       it('should not break general chars', () => {
