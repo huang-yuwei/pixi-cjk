@@ -1,3 +1,5 @@
+import * as PIXI from 'pixi.js';
+
 // Line breaking rules in CJK (Kinsoku Shori)
 // Refer from https://en.wikipedia.org/wiki/Line_breaking_rules_in_East_Asian_languages
 const regexCannotStartZhCn = /[!%),.:;?\]}¢°·'""†‡›℃∶、。〃〆〕〗〞﹚﹜！＂％＇），．：；？！］｝～]/;
@@ -16,19 +18,19 @@ const regexCannotEnd = new RegExp(
   `${regexCannotEndZhCn.source}|${regexCannotEndZhTw.source}|${regexCannotEndJaJp.source}|${regexCannotEndKoKr.source}`,
 );
 
-export const canBreakChars = function canBreakChars(
-  char: string,
+export const shouldBreakByKinsokuShorui = (
+  char: string | undefined,
   nextChar?: string,
-) {
-  if (this.isBreakingSpace(char)) return false;
+): boolean => {
+  if (PIXI.TextMetrics.isBreakingSpace(nextChar)) return false;
 
-  if (nextChar) {
+  if (char) {
     // Line breaking rules in CJK (Kinsoku Shori)
-    if (regexCannotEnd.exec(char) || regexCannotStart.exec(nextChar)) {
-      return false;
+    if (regexCannotEnd.exec(nextChar) || regexCannotStart.exec(char)) {
+      return true;
     }
   }
-  return true;
+  return false;
 };
 
 export const trimByKinsokuShorui = (prev: string[]): string[] => {
