@@ -18,7 +18,3 @@ import 'pixi-cjk';
 
 - About the Kinsoku-shori, detect the Regex of unbreakable character (refer from: https://en.wikipedia.org/wiki/Line_breaking_rules_in_East_Asian_languages), and preventing break-lines when the matched the result.
 - About the breaking space, when a space is following by a NOT-LATIN word, the space should not be a breaking space.
-
-## Example & Playground
-
-https://codepen.io/huang-yuwei/pen/GRqbEmm
