@@ -34,6 +34,13 @@ PIXI.TextMetrics.wordWrap = function (
     const nextChar = text[i + 1];
     const width = calcWidth(char);
 
+    if (this.isNewline(char)) {
+      currentIndex++;
+      currentWidth = 0;
+      lines[currentIndex] = '';
+      continue;
+    }
+
     if (currentWidth + width > maxWidth) {
       currentIndex++;
       currentWidth = 0;
