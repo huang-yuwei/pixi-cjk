@@ -68,8 +68,8 @@ describe('PIXI.TextMetrics', () => {
         '?',
       ];
       const afterPlugin = [
-        '안녕하세요,이 테스트의 문장입니다 제대로',
-        '표시하고 있습니까?',
+        '안녕하세요,이 테스트의 문장입니다 제대로 표',
+        '시하고 있습니까?',
       ];
       const source = beforePlugin.join('');
 
