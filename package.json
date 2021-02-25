@@ -60,6 +60,8 @@
     "url": "https://github.com/huang-yuwei/pixi-cjk/issues"
   },
   "files": [
+    "bin/",
+    "src/",
     "LICENSE",
     "package.json",
     "README.md"
