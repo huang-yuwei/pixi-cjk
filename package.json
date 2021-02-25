@@ -1,6 +1,6 @@
 {
   "name": "pixi-cjk",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "CJK supporting for Pixi.js",
   "author": "Yuwei Huang <yuwei.h.design@gmail.com>",
   "main": "bin/pixi-cjk.min.js",
@@ -60,6 +60,8 @@
     "url": "https://github.com/huang-yuwei/pixi-cjk/issues"
   },
   "files": [
+    "bin/",
+    "src/",
     "LICENSE",
     "package.json",
     "README.md"
