@@ -59,6 +59,10 @@
   "bugs": {
     "url": "https://github.com/huang-yuwei/pixi-cjk/issues"
   },
+  "jest": {
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true
+  },
   "files": [
     "bin/",
     "src/",
