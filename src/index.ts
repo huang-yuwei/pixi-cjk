@@ -15,7 +15,7 @@ PIXI.TextMetrics.wordWrap = function (
   { wordWrapWidth, letterSpacing }: PIXI.TextStyle,
   canvasTarget?: HTMLCanvasElement,
 ): string {
-  const canvas = canvasTarget || PIXI.TextMetrics._canvas;
+  const canvas = canvasTarget || this._canvas;
   const context = canvas.getContext('2d');
   const maxWidth = wordWrapWidth + letterSpacing;
 

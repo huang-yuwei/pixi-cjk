@@ -22,7 +22,10 @@ export const shouldBreakByKinsokuShorui = (
   char: string | undefined,
   nextChar?: string,
 ): boolean => {
-  if (PIXI.TextMetrics.isBreakingSpace(nextChar)) return false;
+  // @ts-ignore
+  const isBreakingSpace = PIXI.TextMetrics.isBreakingSpace;
+
+  if (isBreakingSpace(nextChar)) return false;
 
   if (char) {
     // Line breaking rules in CJK (Kinsoku Shori)

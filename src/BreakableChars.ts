@@ -8,6 +8,9 @@ export const canBreakInLastChar = (char: string | undefined): boolean => {
 };
 
 export const trimToBreakable = (prev: string[]): string[] => {
+  // @ts-ignore
+  const isBreakingSpace = PIXI.TextMetrics.isBreakingSpace;
+
   const next = [...prev];
   const prevLine = next[next.length - 2];
 
@@ -15,7 +18,7 @@ export const trimToBreakable = (prev: string[]): string[] => {
   if (index === -1 || !prevLine) return next;
 
   const trimmedChar = prevLine.slice(index, index + 1);
-  const isTrimmedWithSpace = PIXI.TextMetrics.isBreakingSpace(trimmedChar);
+  const isTrimmedWithSpace = isBreakingSpace(trimmedChar);
 
   const trimFrom = index + 1;
   const trimTo = index + (isTrimmedWithSpace ? 0 : 1);
