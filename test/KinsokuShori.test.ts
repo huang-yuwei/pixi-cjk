@@ -12,13 +12,23 @@ describe('KinsokuShori', () => {
       prev = ['こんにちは、これはテストの文章、正しく表示してる', '?'];
     });
 
-    it('should return an array of updating lines', () => {
-      next = ['こんにちは、これはテストの文章、正しく表示して', 'る?'];
-      expect(trimByKinsokuShorui(prev)).toStrictEqual(next);
+    describe('when triming with multi-lines', () => {
+      it('should return an array of updating lines', () => {
+        next = ['こんにちは、これはテストの文章、正しく表示して', 'る?'];
+        expect(trimByKinsokuShorui(prev)).toStrictEqual(next);
 
-      prev = ['안녕하세요,이 테스트의 문장입니다 제대로 표시하고', '?'];
-      next = ['안녕하세요,이 테스트의 문장입니다 제대로 표시하', '고?'];
-      expect(trimByKinsokuShorui(prev)).toStrictEqual(next);
+        prev = ['안녕하세요,이 테스트의 문장입니다 제대로 표시하고', '?'];
+        next = ['안녕하세요,이 테스트의 문장입니다 제대로 표시하', '고?'];
+        expect(trimByKinsokuShorui(prev)).toStrictEqual(next);
+      });
+    });
+
+    describe('when triming with one line', () => {
+      it('should return an array of original lines', () => {
+        prev = ['こんにちは、これはテストの文章、正しく表示してる？'];
+        next = ['こんにちは、これはテストの文章、正しく表示してる？'];
+        expect(trimByKinsokuShorui(prev)).toStrictEqual(next);
+      });
     });
   });
 
