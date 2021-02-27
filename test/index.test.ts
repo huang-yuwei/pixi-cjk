@@ -25,10 +25,12 @@ describe('PIXI.TextMetrics', () => {
         return createElement(tagName);
     }
   });
-  const canvas = document.createElement('canvas');
+  const mockCanvas = document.createElement('canvas');
 
   // Test the word wrapping result
-  const subject = (source: string): string[] => {
+  const subject = (source: string, canvas?: HTMLCanvasElement): string[] => {
+    // @ts-ignore
+    TextMetrics._canvas = mockCanvas;
     const { lines } = TextMetrics.measureText(source, style, true, canvas);
     return lines;
   };
@@ -209,6 +211,16 @@ describe('PIXI.TextMetrics', () => {
 ${beforePlugin[1]}`;
         expect(subject(source)).toStrictEqual(afterPlugin);
       });
+    });
+  });
+
+  describe('canvas is passed from out side', () => {
+    it('should return a valid strings', () => {
+      const beforePlugin = ['你好，這是一篇測試文章，想確認這文章段落是否正常'];
+      const afterPlugin = ['你好，這是一篇測試文章，想確認這文章段落是否正常'];
+
+      const source = beforePlugin.join('');
+      expect(subject(source, mockCanvas)).toStrictEqual(afterPlugin);
     });
   });
 });
