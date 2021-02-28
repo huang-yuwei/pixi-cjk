@@ -9,6 +9,9 @@ jobs:
     steps:
       - checkout
 
+      - codecov/upload:
+          file: { { coverage_report_filepath } }
+
       # Download and cache dependencies
       - restore_cache:
           keys:
