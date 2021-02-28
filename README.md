@@ -8,6 +8,7 @@ pixi-cjk is a plugin for Pixi.js to display the Chinese/Japanese/Korean correctl
 - prevent unneeded breaking space when follwoing by CJK character
 
 ## Setup
+
 ```
 npm install pixi-cjk
 ```
@@ -27,10 +28,4 @@ import 'pixi-cjk';
 
 ## Example
 
-### Before
-
-![before](docs/before.png)
-
-### After
-
-![before](docs/after.png)
+![before-after](docs/screenshot.png)

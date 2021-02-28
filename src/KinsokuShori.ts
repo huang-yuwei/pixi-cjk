@@ -39,9 +39,11 @@ export const shouldBreakByKinsokuShorui = (
 export const trimByKinsokuShorui = (prev: string[]): string[] => {
   const next = [...prev];
   const prevLine = next[next.length - 2];
+  if (!prevLine) return prev;
+
   const lastChar = prevLine[prevLine.length - 1];
 
   next[next.length - 2] = prevLine.slice(0, -1);
-  next[next.length - 1] = (lastChar || '') + next[next.length - 1];
+  next[next.length - 1] = lastChar + next[next.length - 1];
   return next;
 };
