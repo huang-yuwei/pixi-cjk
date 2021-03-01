@@ -40,7 +40,7 @@ PIXI.TextMetrics.wordWrap = function (
       return;
     }
 
-    if (currentWidth + width > maxWidth) {
+    if (currentWidth > 0 && currentWidth + width > maxWidth) {
       currentIndex++;
       currentWidth = 0;
       lines[currentIndex] = '';
