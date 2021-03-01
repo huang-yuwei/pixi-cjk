@@ -28,8 +28,7 @@ PIXI.TextMetrics.wordWrap = function (
     return this.getFromCache(char, letterSpacing, cache, context);
   };
 
-  for (let i = 0; i < text.length; i++) {
-    const char = text[i];
+  Array.from(text).forEach((char, i) => {
     const prevChar = text[i - 1];
     const nextChar = text[i + 1];
     const width = calcWidth(char);
@@ -38,16 +37,16 @@ PIXI.TextMetrics.wordWrap = function (
       currentIndex++;
       currentWidth = 0;
       lines[currentIndex] = '';
-      continue;
+      return;
     }
 
-    if (currentWidth + width > maxWidth) {
+    if (currentWidth > 0 && currentWidth + width > maxWidth) {
       currentIndex++;
       currentWidth = 0;
       lines[currentIndex] = '';
 
       if (this.isBreakingSpace(char)) {
-        continue;
+        return;
       }
 
       if (!canBreakInLastChar(char)) {
@@ -63,6 +62,6 @@ PIXI.TextMetrics.wordWrap = function (
 
     currentWidth += width;
     lines[currentIndex] = (lines[currentIndex] || '') + char;
-  }
+  });
   return lines.join('\n');
 };

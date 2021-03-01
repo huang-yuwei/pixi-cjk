@@ -4,13 +4,7 @@ import '../src';
 describe('PIXI.TextMetrics', () => {
   const fontSize = 14;
   // Generate Text style
-  const style = new TextStyle({
-    fontWeight: 'bold',
-    fontSize: fontSize,
-    wordWrap: true,
-    breakWords: true,
-    wordWrapWidth: 340,
-  });
+  let style: TextStyle;
 
   // Mock canvas element
   const createElement = document.createElement.bind(document);
@@ -34,6 +28,16 @@ describe('PIXI.TextMetrics', () => {
     const { lines } = TextMetrics.measureText(source, style, true, canvas);
     return lines;
   };
+
+  beforeEach(() => {
+    style = new TextStyle({
+      fontWeight: 'bold',
+      fontSize: fontSize,
+      wordWrap: true,
+      breakWords: true,
+      wordWrapWidth: 340,
+    });
+  });
 
   describe('Kinsoku-Shorui in text metrics', () => {
     describe('Chinese', () => {
@@ -218,6 +222,17 @@ ${beforePlugin[1]}`;
     it('should return a valid strings', () => {
       const beforePlugin = ['你好，這是一篇測試文章，想確認這文章段落是否正常'];
       const afterPlugin = ['你好，這是一篇測試文章，想確認這文章段落是否正常'];
+
+      const source = beforePlugin.join('');
+      expect(subject(source, mockCanvas)).toStrictEqual(afterPlugin);
+    });
+  });
+
+  describe('string contains emoji chars', () => {
+    it('should return a valid strings', () => {
+      const beforePlugin = ['🚀'];
+      const afterPlugin = ['🚀'];
+      style.wordWrapWidth = 25;
 
       const source = beforePlugin.join('');
       expect(subject(source, mockCanvas)).toStrictEqual(afterPlugin);
