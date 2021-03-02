@@ -235,7 +235,18 @@ ${beforePlugin[1]}`;
       style.wordWrapWidth = 25;
 
       const source = beforePlugin.join('');
-      expect(subject(source, mockCanvas)).toStrictEqual(afterPlugin);
+      expect(subject(source)).toStrictEqual(afterPlugin);
+    });
+  });
+
+  describe('string contains compound emoji chars', () => {
+    it('should return a valid strings', () => {
+      const beforePlugin = ['👨‍👨‍👧‍👧', '🧑🏻‍🎨', '👩🏻‍🚒'];
+      const afterPlugin = ['👨‍👨‍👧‍👧', '🧑🏻‍🎨', '👩🏻‍🚒'];
+      style.wordWrapWidth = 25;
+
+      const source = beforePlugin.join('');
+      expect(subject(source)).toStrictEqual(afterPlugin);
     });
   });
 });

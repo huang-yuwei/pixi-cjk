@@ -1,4 +1,5 @@
 import * as PIXI from 'pixi.js';
+import runes from 'runes';
 import {
   trimByKinsokuShorui,
   shouldBreakByKinsokuShorui,
@@ -28,7 +29,7 @@ PIXI.TextMetrics.wordWrap = function (
     return this.getFromCache(char, letterSpacing, cache, context);
   };
 
-  Array.from(text).forEach((char, i) => {
+  runes(text).forEach((char, i) => {
     const prevChar = text[i - 1];
     const nextChar = text[i + 1];
     const width = calcWidth(char);
