@@ -1625,6 +1625,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/runes@^0.4.1":
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/@types/runes/-/runes-0.4.1.tgz#ec16e8d73dd1acfa09aca3b6a9180dfef45045ae"
+  integrity sha512-wb2qEPRr/BXKB1xx7S5OzbnZmqIGRPrw0SjBJYnLA+l5DEGmyw7veFXQ0Cko/gotDTB+yGpsZOAkLDWZTyJo6w==
+
 "@types/stack-utils@^2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@types/stack-utils/-/stack-utils-2.0.0.tgz#7036640b4e21cc2f259ae826ce843d277dad8cff"
@@ -5467,6 +5472,11 @@ run-parallel@^1.1.9:
   version "1.1.10"
   resolved "https://registry.yarnpkg.com/run-parallel/-/run-parallel-1.1.10.tgz#60a51b2ae836636c81377df16cb107351bcd13ef"
   integrity sha512-zb/1OuZ6flOlH6tQyMPUrE3x3Ulxjlo9WIVXR4yVYi4H9UXQaeIsPbLn2R3O3vQCnDKkAl2qHiuocKKX4Tz/Sw==
+
+runes@^0.4.3:
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/runes/-/runes-0.4.3.tgz#32f7738844bc767b65cc68171528e3373c7bb355"
+  integrity sha512-K6p9y4ZyL9wPzA+PMDloNQPfoDGTiFYDvdlXznyGKgD10BJpcAosvATKrExRKOrNLgD8E7Um7WGW0lxsnOuNLg==
 
 safe-buffer@^5.0.1, safe-buffer@^5.1.0, safe-buffer@^5.1.2:
   version "5.2.1"
