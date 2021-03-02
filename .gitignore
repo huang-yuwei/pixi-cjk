@@ -1,6 +1,7 @@
 # Dependency directories
 node_modules/
 bin/
+coverage/
 
 # IDE - VSCode
 .vscode/*
