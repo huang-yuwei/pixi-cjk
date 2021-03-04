@@ -1,7 +1,7 @@
 {
   "name": "pixi-cjk",
-  "version": "0.2.4",
-  "description": "CJK supporting for Pixi.js",
+  "version": "0.2.5",
+  "description": "CJK support for Pixi.js",
   "author": "Yuwei Huang <yuwei.h.design@gmail.com>",
   "main": "bin/pixi-cjk.min.js",
   "scripts": {
